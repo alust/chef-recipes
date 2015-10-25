@@ -35,18 +35,28 @@ if server_type == 'app'
   directory '/root/app'
 
   file "/root/app/app.py" do
+    mode 755
     content '#!/usr/bin/python
 
 import sys
-from flask import Flask, Response
+from flask import Flask
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return Response(sys.args[2])
+    return sys.argv[2]
 
-app.run(host="0.0.0.0", port=int(sys.args[1]))'
+app.run(host="0.0.0.0", port=int(sys.argv[1]))'
   end
-  
+
+  execute 'app1'
+    cwd '/root/app'
+    command '/root/app/app.py 5001 APP1 > /tmp/app1 &'
+  end  
+
+  execute 'app2'
+    cwd '/root/app'
+    command '/root/app/app.py 5002 APP2 > /tmp/app2 &'
+  end  
 end
