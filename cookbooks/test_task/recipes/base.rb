@@ -68,3 +68,40 @@ app.run(host="0.0.0.0", port=int(sys.argv[1]))'
   #  command "route add -net 0.0.0.0 gw #{File.open('/usr/local/server_type').read}"
   #end
 end
+
+if server_type == 'web'
+  package 'nginx'
+
+  directory '/tmp/nginx/cache' do
+    mode 700
+    owner 'www-data'
+  end
+
+  file "/etc/nginx/sites-available/default" do
+    content "proxy_cache_path /tmp/nginx/cache levels=1:2 keys_zone=cache:30m max_size=1G;
+proxy_temp_path /tmp/nginx/proxy 1 2;
+proxy_ignore_headers Expires Cache-Control;
+proxy_cache_use_stale error timeout invalid_header http_502;
+server {
+        listen 80 default_server;
+        root /var/www/html;
+        server_name _;
+        location /app1 {
+                proxy_cache cache;
+                proxy_cache_valid 10m;
+                proxy_cache_valid 404 1m;
+                proxy_pass http://192.168.1.13:5001/;
+        }
+        location /app2 {
+                proxy_cache cache;
+                proxy_cache_valid 10m;
+                proxy_cache_valid 404 1m;
+                proxy_pass http://192.168.1.13:5002/;
+        }
+}"
+  end
+
+  service 'nginx' do
+    action :restart
+  end
+end
