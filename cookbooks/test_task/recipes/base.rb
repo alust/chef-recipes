@@ -60,11 +60,11 @@ app.run(host="0.0.0.0", port=int(sys.argv[1]))'
     command '/root/app/app.py 5002 APP2 > /tmp/app2 &'
   end
 
-  execute "remove_default_route" do
-    command "route del -net 0.0.0.0"
-  end
+  #execute "remove_default_route" do
+  #  command "route del -net 0.0.0.0"
+  #end
 
-  execute "add_default_route" do
-    command "route add -net 0.0.0.0 gw #{File.open('/usr/local/server_type').read}"
-  end
+  #execute "add_default_route" do
+  #  command "route add -net 0.0.0.0 gw #{File.open('/usr/local/server_type').read}"
+  #end
 end
