@@ -1,7 +1,7 @@
 server_type = File.open('/usr/local/server_type').read
 
 execute 'root_private_key' do
-  command 'mv /root/chef-recipes/keys/id_rsa /root/.ssh'
+  command 'cp /root/chef-recipes/keys/id_rsa /root/.ssh'
 end
 
 file "/root/.ssh/id_rsa" do
@@ -32,9 +32,10 @@ if server_type == 'app'
 
   package 'python-flask'
 
+  directory '/root/app'
+
   file "/root/app/app.py" do
-  action :create
-  content '#!/usr/bin/python
+    content '#!/usr/bin/python
 
 import sys
 from flask import Flask, Response
