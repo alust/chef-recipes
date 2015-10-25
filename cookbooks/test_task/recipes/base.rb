@@ -50,13 +50,13 @@ def index():
 app.run(host="0.0.0.0", port=int(sys.argv[1]))'
   end
 
-  execute 'app1'
+  execute 'app1' do
     cwd '/root/app'
     command '/root/app/app.py 5001 APP1 > /tmp/app1 &'
   end  
 
-  execute 'app2'
+  execute 'app2' do
     cwd '/root/app'
     command '/root/app/app.py 5002 APP2 > /tmp/app2 &'
-  end  
+  end
 end
