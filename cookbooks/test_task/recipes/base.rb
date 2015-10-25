@@ -12,5 +12,40 @@ end
 
 execute 'root_public_key' do
   cwd '/root/.ssh'
-  command 'ssh-keygen -f id_rsa >> authorized_keys'
+  command 'ssh-keygen -y -f id_rsa >> authorized_keys'
+end
+
+if server_type == 'bastion'
+  execute 'enable_forwarding' do
+    command 'echo 1 > /proc/sys/net/ipv4/ip_forward'
+  end
+
+  execute 'nat' do
+    command 'iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE'
+  end
+end
+
+if server_type == 'app'
+  package 'mysql-server' do
+    response_file_variables 'mysql-server/root_password_again' => 'abc12345', 'mysql-server/root_password' => 'abc12345'
+  end
+
+  package 'python-flask'
+
+  file "/root/app/app.py" do
+  action :create
+  content '#!/usr/bin/python
+
+import sys
+from flask import Flask, Response
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return Response(sys.args[2])
+
+app.run(host='0.0.0.0', port=int(sys.args[1]))'
+  end
+  
 end
