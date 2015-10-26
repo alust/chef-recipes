@@ -296,7 +296,6 @@ class Chef::Application::Client < Chef::Application
       end
 
       # see CHEF-5172
-puts "300 chef/application/client.rb"
       if Chef::Config[:daemonize] || Chef::Config[:interval]
         trap("TERM") do
           Chef::Log.info("SIGTERM received, exiting gracefully")
@@ -329,7 +328,7 @@ puts "320 chef/application/client.rb"
 puts "330 chef/application/client.rb"
 
         signal = nil
-puts "332 chef/application/client.rb"
+puts "331 chef/application/client.rb run_chef_client=#{method(:run_chef_client).source_location}"
         run_chef_client(Chef::Config[:specific_recipes])
 puts "334 chef/application/client.rb"
 
