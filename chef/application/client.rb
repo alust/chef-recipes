@@ -346,7 +346,6 @@ puts "339 chef/application/client.rb"
           signal = interval_sleep
           retry
         else
-puts "346 chef/application/client.rb"
           Chef::Application.fatal!("#{e.class}: #{e.message}", 1)
         end
       end

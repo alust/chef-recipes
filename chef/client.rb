@@ -401,7 +401,7 @@ puts "228 chef/client.rb"
     # === Returns
     # true:: Always returns true.
     def do_run
-puts "404 chef/client.rb RunLock.new=#{RunLock.method(:initialize).source_location}, Chef::Config.lockfile=#{Chef::Config.lockfile}"
+puts "404 chef/client.rb RunLock.new=#{RunLock.method(:initialize).source_location}, Chef::Config.lockfile=#{Chef::Config.method(:lockfile).source_location}"
       runlock = RunLock.new(Chef::Config.lockfile)
 puts "408 chef/client.rb"
       runlock.acquire
