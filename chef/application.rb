@@ -206,7 +206,6 @@ class Chef::Application
     if specific_recipes.size > 0
       override_runlist ||= []
     end
-puts "210 chef/application.rb"
     @chef_client = Chef::Client.new(
       @chef_client_json,
       :override_runlist => config[:override_runlist],
