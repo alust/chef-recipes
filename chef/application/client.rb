@@ -307,6 +307,7 @@ puts "300 chef/application/client.rb"
     end
 
     if Chef::Config[:version]
+puts "310 chef/application/client.rb"
       puts "Chef version: #{::Chef::VERSION}"
     end
 
@@ -316,6 +317,7 @@ puts "300 chef/application/client.rb"
 
     signal = nil
 
+puts "320 chef/application/client.rb"
     loop do
       begin
         Chef::Application.exit!("Exiting", 0) if signal == GRACEFUL_EXIT_SIGNAL
@@ -325,6 +327,7 @@ puts "300 chef/application/client.rb"
           Chef::Log.debug("Splay sleep #{splay} seconds")
           sleep splay
         end
+puts "330 chef/application/client.rb"
 
         signal = nil
         run_chef_client(Chef::Config[:specific_recipes])
@@ -333,6 +336,7 @@ puts "300 chef/application/client.rb"
           Chef::Log.debug("Sleeping for #{Chef::Config[:interval]} seconds")
           signal = interval_sleep
         else
+puts "339 chef/application/client.rb"
           Chef::Application.exit! "Exiting", 0
         end
       rescue SystemExit => e
