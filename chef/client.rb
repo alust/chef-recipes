@@ -206,7 +206,6 @@ class Chef
         Chef::Log.info "Forking chef instance to converge..."
         pid = fork do
           [:INT, :TERM].each {|s| trap(s, "EXIT") }
-puts "210 chef/client.rb"
           client_solo = Chef::Config[:solo] ? "chef-solo" : "chef-client"
           $0 = "#{client_solo} worker: ppid=#{Process.ppid};start=#{Time.new.strftime("%R:%S")};"
           begin
@@ -404,6 +403,7 @@ puts "228 chef/client.rb"
     def do_run
 puts "406 chef/client.rb"
       runlock = RunLock.new(Chef::Config.lockfile)
+puts "408 chef/client.rb"
       runlock.acquire
       # don't add code that may fail before entering this section to be sure to release lock
       begin
