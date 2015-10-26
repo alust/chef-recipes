@@ -199,7 +199,6 @@ class Chef
     # === Returns
     # boolean:: Return value from #do_run. Should always returns true.
     def run
-puts "202 chef/client.rb"
       # win32-process gem exposes some form of :fork for Process
       # class. So we are seperately ensuring that the platform we're
       # running on is not windows before forking.
@@ -408,6 +407,7 @@ puts "406 chef/client.rb"
       runlock.acquire
       # don't add code that may fail before entering this section to be sure to release lock
       begin
+puts "410 chef/client.rb"
         runlock.save_pid
 
         check_ssl_config
@@ -417,6 +417,7 @@ puts "406 chef/client.rb"
         @events.run_start(Chef::VERSION)
         Chef::Log.info("*** Chef #{Chef::VERSION} ***")
         Chef::Log.info "Chef-client pid: #{Process.pid}"
+puts "420 chef/client.rb"
         Chef::Log.debug("Chef-client request_id: #{request_id}")
         enforce_path_sanity
         run_ohai
@@ -426,6 +427,7 @@ puts "406 chef/client.rb"
         load_node
 
         build_node
+puts "430 chef/client.rb"
 
         run_status.run_id = request_id
         run_status.start_clock
@@ -435,6 +437,7 @@ puts "406 chef/client.rb"
         do_windows_admin_check
 
         run_context = setup_run_context
+puts "440 chef/client.rb"
 
         converge(run_context)
 
