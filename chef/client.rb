@@ -212,13 +212,15 @@ puts "210 chef/client.rb"
           $0 = "#{client_solo} worker: ppid=#{Process.ppid};start=#{Time.new.strftime("%R:%S")};"
           begin
             Chef::Log.debug "Forked instance now converging"
-puts "215 chef/client.rb"
+puts "215 chef/client.rb do_run=#{method(:do_run).source_location}"
             do_run
           rescue Exception => e
+puts "218 chef/client.rb"
             Chef::Log.error(e.to_s)
+puts "220 chef/client.rb"
             exit 1
           else
-puts "220 chef/client.rb"
+puts "223 chef/client.rb"
             exit 0
           end
         end

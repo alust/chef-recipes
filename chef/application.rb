@@ -212,7 +212,6 @@ class Chef::Application
       :specific_recipes => specific_recipes,
       :runlist => config[:runlist]
     )
-puts "217 chef/application.rb"
     @chef_client_json = nil
 puts "219 chef/application.rb @chef_client.run=#{@chef_client.method(:run).source_location}"
 
