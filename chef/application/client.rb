@@ -329,7 +329,9 @@ puts "320 chef/application/client.rb"
 puts "330 chef/application/client.rb"
 
         signal = nil
+puts "332 chef/application/client.rb"
         run_chef_client(Chef::Config[:specific_recipes])
+puts "334 chef/application/client.rb"
 
         if Chef::Config[:interval]
 puts "335 chef/application/client.rb"
