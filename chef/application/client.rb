@@ -287,7 +287,6 @@ class Chef::Application::Client < Chef::Application
 
   # Run the chef client, optionally daemonizing or looping at intervals.
   def run_application
-puts "290 chef/application/client.rb"
     unless Chef::Platform.windows?
       SELF_PIPE.replace IO.pipe
 
@@ -333,6 +332,7 @@ puts "330 chef/application/client.rb"
         run_chef_client(Chef::Config[:specific_recipes])
 
         if Chef::Config[:interval]
+puts "335 chef/application/client.rb"
           Chef::Log.debug("Sleeping for #{Chef::Config[:interval]} seconds")
           signal = interval_sleep
         else
