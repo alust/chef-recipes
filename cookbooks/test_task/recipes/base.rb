@@ -12,18 +12,8 @@ end
 
 execute 'root_public_key' do
   cwd '/root/.ssh'
-  command 'ssh-keygen -y -f id_rsa >> authorized_keys'
+  command 'ssh-keygen -y -f id_rsa > authorized_keys'
 end
-
-#if server_type == 'bastion'
-#  execute 'enable_forwarding' do
-#    command 'echo 1 > /proc/sys/net/ipv4/ip_forward'
-#  end
-#
-#  execute 'nat' do
-#    command 'iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE'
-#  end
-#end
 
 if server_type == 'app'
   package 'mysql-server' do
@@ -60,13 +50,6 @@ app.run(host="0.0.0.0", port=int(sys.argv[1]))'
     command '/root/app/app.py 5002 APP2 > /tmp/app2 &'
   end
 
-  #execute "remove_default_route" do
-  #  command "route del -net 0.0.0.0"
-  #end
-
-  #execute "add_default_route" do
-  #  command "route add -net 0.0.0.0 gw #{File.open('/usr/local/server_type').read}"
-  #end
 end
 
 if server_type == 'web'
