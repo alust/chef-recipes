@@ -326,7 +326,6 @@ puts "310 chef/application/client.rb"
         end
 
         signal = nil
-puts "331 chef/application/client.rb run_chef_client=#{method(:run_chef_client).source_location}"
         run_chef_client(Chef::Config[:specific_recipes])
 puts "334 chef/application/client.rb"
 
