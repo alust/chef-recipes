@@ -403,6 +403,7 @@ puts "228 chef/client.rb"
     # === Returns
     # true:: Always returns true.
     def do_run
+puts "406 chef/client.rb"
       runlock = RunLock.new(Chef::Config.lockfile)
       runlock.acquire
       # don't add code that may fail before entering this section to be sure to release lock
@@ -446,6 +447,7 @@ puts "228 chef/client.rb"
         true
       rescue Exception => e
         # CHEF-3336: Send the error first in case something goes wrong below and we don't know why
+puts "450 chef/client.rb"
         Chef::Log.debug("Re-raising exception: #{e.class} - #{e.message}\n#{e.backtrace.join("\n  ")}")
         # If we failed really early, we may not have a run_status yet. Too early for these to be of much use.
         if run_status
@@ -464,6 +466,7 @@ puts "228 chef/client.rb"
         runlock.release
         GC.start
       end
+puts "468 chef/client.rb"
       true
     end
 
