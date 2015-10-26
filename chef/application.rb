@@ -200,7 +200,6 @@ class Chef::Application
 
   # Initializes Chef::Client instance and runs it
   def run_chef_client(specific_recipes = [])
-puts "203 chef/application.rb"
     Chef::Application.setup_server_connectivity
 
     override_runlist = config[:override_runlist]

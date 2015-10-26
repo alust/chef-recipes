@@ -199,6 +199,7 @@ class Chef
     # === Returns
     # boolean:: Return value from #do_run. Should always returns true.
     def run
+puts "202 chef/client.rb"
       # win32-process gem exposes some form of :fork for Process
       # class. So we are seperately ensuring that the platform we're
       # running on is not windows before forking.
@@ -206,6 +207,7 @@ class Chef
         Chef::Log.info "Forking chef instance to converge..."
         pid = fork do
           [:INT, :TERM].each {|s| trap(s, "EXIT") }
+puts "210 chef/client.rb"
           client_solo = Chef::Config[:solo] ? "chef-solo" : "chef-client"
           $0 = "#{client_solo} worker: ppid=#{Process.ppid};start=#{Time.new.strftime("%R:%S")};"
           begin
@@ -215,6 +217,7 @@ class Chef
             Chef::Log.error(e.to_s)
             exit 1
           else
+puts "220 chef/client.rb"
             exit 0
           end
         end
@@ -224,6 +227,7 @@ class Chef
         Chef::Log.debug "Forked instance successfully reaped (pid: #{pid})"
         true
       else
+puts "228 chef/client.rb"
         do_run
       end
     end
