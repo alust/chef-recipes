@@ -63,7 +63,6 @@ class Chef::Application
   # Get this party started
   def run
     reconfigure
-puts "67 chef/application.rb"
     setup_application
 puts "68 chef/application.rb run_application=#{method(:run_application).source_location}"
     run_application

@@ -287,6 +287,7 @@ class Chef::Application::Client < Chef::Application
 
   # Run the chef client, optionally daemonizing or looping at intervals.
   def run_application
+puts "290 chef/application/client.rb"
     unless Chef::Platform.windows?
       SELF_PIPE.replace IO.pipe
 
@@ -296,6 +297,7 @@ class Chef::Application::Client < Chef::Application
       end
 
       # see CHEF-5172
+puts "300 chef/application/client.rb"
       if Chef::Config[:daemonize] || Chef::Config[:interval]
         trap("TERM") do
           Chef::Log.info("SIGTERM received, exiting gracefully")
@@ -342,6 +344,7 @@ class Chef::Application::Client < Chef::Application
           signal = interval_sleep
           retry
         else
+puts "346 chef/application/client.rb"
           Chef::Application.fatal!("#{e.class}: #{e.message}", 1)
         end
       end
