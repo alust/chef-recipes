@@ -214,6 +214,7 @@ puts "210 chef/application.rb"
       :specific_recipes => specific_recipes,
       :runlist => config[:runlist]
     )
+puts "217 chef/application.rb"
     @chef_client_json = nil
 
     @chef_client.run

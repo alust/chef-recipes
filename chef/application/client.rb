@@ -324,7 +324,6 @@ puts "310 chef/application/client.rb"
           Chef::Log.debug("Splay sleep #{splay} seconds")
           sleep splay
         end
-puts "330 chef/application/client.rb"
 
         signal = nil
 puts "331 chef/application/client.rb run_chef_client=#{method(:run_chef_client).source_location}"
