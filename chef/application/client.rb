@@ -315,7 +315,6 @@ puts "310 chef/application/client.rb"
 
     signal = nil
 
-puts "320 chef/application/client.rb"
     loop do
       begin
         Chef::Application.exit!("Exiting", 0) if signal == GRACEFUL_EXIT_SIGNAL

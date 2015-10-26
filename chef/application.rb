@@ -64,7 +64,6 @@ class Chef::Application
   def run
     reconfigure
     setup_application
-puts "68 chef/application.rb run_application=#{method(:run_application).source_location}"
     run_application
   end
 
@@ -201,12 +200,14 @@ puts "68 chef/application.rb run_application=#{method(:run_application).source_l
 
   # Initializes Chef::Client instance and runs it
   def run_chef_client(specific_recipes = [])
+puts "203 chef/application.rb"
     Chef::Application.setup_server_connectivity
 
     override_runlist = config[:override_runlist]
     if specific_recipes.size > 0
       override_runlist ||= []
     end
+puts "210 chef/application.rb"
     @chef_client = Chef::Client.new(
       @chef_client_json,
       :override_runlist => config[:override_runlist],
@@ -216,8 +217,10 @@ puts "68 chef/application.rb run_application=#{method(:run_application).source_l
     @chef_client_json = nil
 
     @chef_client.run
+puts "220 chef/application.rb"
     @chef_client = nil
 
+puts "221 chef/application.rb"
     Chef::Application.destroy_server_connectivity
   end
 
