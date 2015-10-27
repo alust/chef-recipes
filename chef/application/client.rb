@@ -334,7 +334,6 @@ puts "335 chef/application/client.rb"
           Chef::Log.debug("Sleeping for #{Chef::Config[:interval]} seconds")
           signal = interval_sleep
         else
-puts "339 chef/application/client.rb"
           Chef::Application.exit! "Exiting", 0
         end
       rescue SystemExit => e
