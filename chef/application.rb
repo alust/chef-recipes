@@ -86,6 +86,7 @@ class Chef::Application
       config_content = config_fetcher.read_config
       apply_config(config_content, config[:config_file])
     end
+puts("89 chef/application.rb config=#{method(:config).source_location}, #{config}")
     Chef::Config.merge!(config)
   end
 
