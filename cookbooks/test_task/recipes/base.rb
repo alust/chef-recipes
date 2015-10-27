@@ -58,6 +58,7 @@ if server_type == 'web'
   directory '/tmp/nginx/cache' do
     mode 700
     owner 'www-data'
+    recursive true
   end
 
   file "/etc/nginx/sites-available/default" do
