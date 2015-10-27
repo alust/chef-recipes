@@ -61,6 +61,8 @@ if server_type == 'web'
     recursive true
   end
 
+  app_ip=File.open('/usr/local/app_ip').read
+
   file "/etc/nginx/sites-available/default" do
     content "proxy_cache_path /tmp/nginx/cache levels=1:2 keys_zone=cache:30m max_size=1G;
 proxy_temp_path /tmp/nginx/proxy 1 2;
@@ -74,13 +76,13 @@ server {
                 proxy_cache cache;
                 proxy_cache_valid 10m;
                 proxy_cache_valid 404 1m;
-                proxy_pass http://192.168.1.13:5001/;
+                proxy_pass http://#{app_ip}:5001/;
         }
         location /app2 {
                 proxy_cache cache;
                 proxy_cache_valid 10m;
                 proxy_cache_valid 404 1m;
-                proxy_pass http://192.168.1.13:5002/;
+                proxy_pass http://#{app_ip}:5002/;
         }
 }"
   end
